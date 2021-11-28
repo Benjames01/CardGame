@@ -8,31 +8,42 @@ public static class CardPersistence
 {
     private static string DataPath = Application.dataPath + "/CardPacks/";
     
-    public static void SaveCardToJson(Card card)
+    public static void SaveCardPack(CardPack cardPack)
     {
-        string jsonData = JsonUtility.ToJson(card, true);
-        File.WriteAllText(Application.dataPath+"/CardPacks/card.json", jsonData);
-    }
-
-    public static Card LoadCardFromJson()
-    {
-        
-        Card card = new Card("Enter Card Name","Enter Card Text");
-
         if (!Directory.Exists(DataPath))
         {
-            Debug.Log("Creating Directory at: " + DataPath);
+            Debug.Log("Creating CardPack Directory at: " + DataPath);
             Directory.CreateDirectory(DataPath);
         }
         
-        if (File.Exists(DataPath + "card.json"))
-        {
-            Debug.Log("loading file from json.");
-            string jsonData = File.ReadAllText(DataPath + "card.json");
-            card = JsonUtility.FromJson<Card>(jsonData);
-        }
+        string jsonData = JsonUtility.ToJson(cardPack, true);
+        File.WriteAllText(DataPath + cardPack.Name + ".json", jsonData);
         
-        return card;
+        
+        Debug.Log("Saved: " + cardPack.Name + ".json");
     }
     
+    public static List<CardPack> LoadCardPacks()
+    {
+        List<CardPack> cardPacks = new List<CardPack>();
+
+        if (!Directory.Exists(DataPath))
+        {
+            Debug.Log("Creating CardPack Directory at: " + DataPath);
+            Directory.CreateDirectory(DataPath);
+        }
+
+        DirectoryInfo cardPacksFolder = new DirectoryInfo(DataPath);
+        FileInfo[] cardPackFiles = cardPacksFolder.GetFiles("*.json");
+
+        foreach (var cardPack in cardPackFiles)
+        {
+            string jsonData = File.ReadAllText(DataPath + cardPack.Name);
+            CardPack pack = JsonUtility.FromJson<CardPack>(jsonData);
+            cardPacks.Add(pack);
+        }
+
+        return cardPacks;
+    }
+
 }

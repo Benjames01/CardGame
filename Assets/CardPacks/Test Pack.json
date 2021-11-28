@@ -1,0 +1,17 @@
+{
+    "Cards": [
+        {
+            "Name": "Test card 1",
+            "Text": "Test card 1 text"
+        },
+        {
+            "Name": "Test card 2",
+            "Text": "Test card 2 text"
+        }
+    ],
+    "Name": "Test Pack",
+    "LastPlayed": "",
+    "DateCreated": "28/11/2021 01:25:35",
+    "TimesPlayed": 0,
+    "ID": "290b785c-dc13-438f-a338-0c1dad74b757"
+}

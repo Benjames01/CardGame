@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Michsky.UI.ModernUIPack;
 using TMPro;
@@ -22,32 +23,48 @@ public class CardCreatorUI : MonoBehaviour
 
     [SerializeField] private GameObject variableList;
     [SerializeField] private GameObject variableListItemTemplate;
+    [SerializeField] private GameObject creatorCanvas;
+
+    [SerializeField] private CardPackUI cardPack;
 
     private List<ICardVariable> cardVariables;
 
-    private void Awake()
-    {
-        Card card = CardPersistence.LoadCardFromJson();
+    private Card card;
 
+    private void OnEnable()
+    {
+        PrepareVariablesList();
+    }
+
+    public void EditCard(Card card)
+    {
+        creatorCanvas.SetActive(true);
+        this.card = card;
+        
         cardNameField.text = card.Name;
         cardTextField.text = card.Text;
-
-        PrepareVariablesList();
     }
 
     public void OnSaveButtonClicked()
     {
-        try
-        {
-            Card card = new Card(cardNameField.text, cardTextField.text);
-            CardPersistence.SaveCardToJson(card);
-        }
-        catch (ArgumentNullException e)
+        if (string.IsNullOrWhiteSpace(cardNameField.text) || string.IsNullOrWhiteSpace(cardTextField.text))
         {
             notificationManager.title = "Error Saving Card!";
             notificationManager.description = "Make sure all fields are filled and try again.";
             notificationManager.UpdateUI();
             notificationManager.OpenNotification();
+        }
+        else
+        {
+            card.Name = cardNameField.text;
+            card.Text = cardTextField.text;
+            cardPack.UpdateCard(card);
+            
+            notificationManager.title = "Saved Card!";
+            notificationManager.description = "Card saved successfully!";
+            notificationManager.UpdateUI();
+            notificationManager.OpenNotification();
+            creatorCanvas.SetActive(false);
         }
     }
     
