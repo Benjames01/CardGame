@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.Remoting.Messaging;
 using UnityEngine;
 
 public static class CardPersistence
@@ -44,6 +45,28 @@ public static class CardPersistence
         }
 
         return cardPacks;
+    }
+
+    public static bool RemoveCardPack(string cardPack)
+    {
+        if (!Directory.Exists(DataPath))
+            return false;
+
+        string cardPath = DataPath + cardPack + ".json";
+        string metaPath = DataPath + cardPack + ".json.meta";
+        if (File.Exists(cardPath))
+        {
+            File.Delete(cardPath);
+            
+            if (File.Exists(metaPath))
+            {
+                File.Delete(metaPath);
+            }
+            
+            return true;
+        }
+
+        return false;
     }
 
 }

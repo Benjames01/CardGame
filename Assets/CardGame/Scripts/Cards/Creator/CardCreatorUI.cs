@@ -13,6 +13,12 @@ using Button = UnityEngine.UI.Button;
 
 public class CardCreatorUI : MonoBehaviour
 {
+
+    [SerializeField] private Button btnSaveAndContinue;
+    [SerializeField] private Button btnSaveAndExit;
+    [SerializeField] private Button btnCancelAndExit;
+
+
     [SerializeField]
     private TMP_InputField cardNameField;
     [SerializeField]
@@ -26,18 +32,52 @@ public class CardCreatorUI : MonoBehaviour
     [SerializeField] private GameObject creatorCanvas;
 
     [SerializeField] private CardPackUI cardPack;
-
+    
     private List<ICardVariable> cardVariables;
 
     private Card card;
 
+
+    public static event Action OnCreatorDisplay;
+    public static event Action<Card> OnCardSaved;
+    public static event Action<Card> OnCardSavedAndExit;
+    public static event Action OnCardExit; 
+    
+
     private void OnEnable()
     {
         PrepareVariablesList();
+
+        CardViewerUI.OnCardSelected += EditCard;
+    }
+
+    private void OnDisable()
+    {
+        CardViewerUI.OnCardSelected -= EditCard;
+    }
+
+    private void Awake()
+    {
+        btnCancelAndExit.onClick.AddListener(() =>
+        {
+            OnSaveButtonClicked(SaveType.CancelAndExit);
+        });
+        
+        btnSaveAndContinue.onClick.AddListener(() =>
+        {
+            OnSaveButtonClicked(SaveType.SaveAndContinue);
+        });
+        
+        btnSaveAndExit.onClick.AddListener(() =>
+            {
+                OnSaveButtonClicked(SaveType.SaveAndExit);
+            }
+        );
     }
 
     public void EditCard(Card card)
     {
+        OnCreatorDisplay?.Invoke();
         creatorCanvas.SetActive(true);
         this.card = card;
         
@@ -45,7 +85,17 @@ public class CardCreatorUI : MonoBehaviour
         cardTextField.text = card.Text;
     }
 
-    public void OnSaveButtonClicked()
+
+    public enum SaveType
+    {
+        SaveAndContinue,
+        SaveAndExit,
+        CancelAndExit
+        
+    }
+    
+
+    public void OnSaveButtonClicked(SaveType saveType)
     {
         if (string.IsNullOrWhiteSpace(cardNameField.text) || string.IsNullOrWhiteSpace(cardTextField.text))
         {
@@ -56,15 +106,32 @@ public class CardCreatorUI : MonoBehaviour
         }
         else
         {
-            card.Name = cardNameField.text;
-            card.Text = cardTextField.text;
-            cardPack.UpdateCard(card);
             
-            notificationManager.title = "Saved Card!";
-            notificationManager.description = "Card saved successfully!";
-            notificationManager.UpdateUI();
-            notificationManager.OpenNotification();
-            creatorCanvas.SetActive(false);
+            if (saveType != SaveType.CancelAndExit)
+            {
+                card.Name = cardNameField.text;
+                card.Text = cardTextField.text;
+            }
+            
+            switch (saveType)
+            {
+                case SaveType.CancelAndExit:
+                    OnCardExit?.Invoke();
+                    creatorCanvas.SetActive(false);
+                    break;
+                case SaveType.SaveAndContinue:
+                    OnCardSaved?.Invoke(card);
+                    notificationManager.title = "Saved Card!";
+                    notificationManager.description = "Card saved successfully!";
+                    notificationManager.UpdateUI();
+                    notificationManager.OpenNotification();
+                    notificationManager.CloseNotification();
+                    break;
+                case SaveType.SaveAndExit:
+                    OnCardSavedAndExit?.Invoke(card);
+                    creatorCanvas.SetActive(false);
+                    break;
+            }
         }
     }
     
@@ -78,8 +145,7 @@ public class CardCreatorUI : MonoBehaviour
         int index = 0;
         foreach (var variable in cardVariables)
         {
-            var clone = Instantiate(variableListItemTemplate);
-            clone.transform.parent = variableList.transform;
+            var clone = Instantiate(variableListItemTemplate, variableList.transform, true);
             clone.transform.localScale = Vector3.one;
             
             TMP_Text name = clone.transform.Find("Name Panel/Name Value").GetComponent<TMP_Text>();
@@ -94,7 +160,6 @@ public class CardCreatorUI : MonoBehaviour
             clone.GetComponent<Button>().onClick.AddListener(
                 (() =>
                     {
-                        Debug.Log("Index of pressed button is: " + tempIndex);
                         AddIdentifierToText(cardVariables[tempIndex]);
                     }));
             index++;

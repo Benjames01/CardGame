@@ -14,13 +14,11 @@ public class Card
 
     public Card(string name, string text)
     {
-        if (string.IsNullOrEmpty((name)) || string.IsNullOrEmpty(text))
-        {
-            throw new ArgumentNullException();
-        }
         this.Name = name;
         this.Text = text;
         this.ID = GUID.Generate().ToString();
     }
+
+
 }
 
