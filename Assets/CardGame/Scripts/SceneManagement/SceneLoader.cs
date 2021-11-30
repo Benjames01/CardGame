@@ -14,8 +14,8 @@ public static class SceneLoader
         SettingsScene
     }
     
-    public static void LoadScene(Scene scene)
+    public static async void LoadScene(Scene scene)
     {
-        SceneManager.LoadScene(scene.ToString());
+       var load = SceneManager.LoadSceneAsync(scene.ToString());
     }    
 }
