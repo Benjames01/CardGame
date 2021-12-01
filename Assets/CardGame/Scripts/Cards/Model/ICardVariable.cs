@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 public interface ICardVariable
@@ -8,5 +9,7 @@ public interface ICardVariable
     string Description { get; }
     string Identifier { get; }
 
-    string GetValue();
+    string GetValue(int args0 = -1);
+
+    Regex GetRegex();
 }

@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using System.Text.RegularExpressions;
+using Random = UnityEngine.Random;
 
 public class VariableRandomNumber : ICardVariable
 {
@@ -16,9 +18,13 @@ public class VariableRandomNumber : ICardVariable
     {
         get => "%Random[max]%";
     }
-    
-    public string GetValue()
+    public Regex GetRegex()
     {
-        return Random.Range(0, 10).ToString();
+        return new Regex(@"%Random\[(?<Param>\d{1,2}|100)\]%", RegexOptions.IgnoreCase);
+    }
+    
+    public string GetValue(int max)
+    {
+        return "<b>" + Random.Range(1, max).ToString() + "</b>";
     }
 }

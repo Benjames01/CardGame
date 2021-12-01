@@ -32,8 +32,6 @@ public class CardCreatorUI : MonoBehaviour
     [SerializeField] private GameObject creatorCanvas;
 
     [SerializeField] private CardPackUI cardPack;
-    
-    private List<ICardVariable> cardVariables;
 
     private Card card;
 
@@ -137,13 +135,8 @@ public class CardCreatorUI : MonoBehaviour
     
     public void PrepareVariablesList()
     {
-        cardVariables = new List<ICardVariable>();
-        cardVariables.Add(new VariableRandomNumber());
-        cardVariables.Add(new VariableRandomPlayer());
-
-
         int index = 0;
-        foreach (var variable in cardVariables)
+        foreach (var variable in CardUtils.CardVariables)
         {
             var clone = Instantiate(variableListItemTemplate, variableList.transform, true);
             clone.transform.localScale = Vector3.one;
@@ -160,7 +153,7 @@ public class CardCreatorUI : MonoBehaviour
             clone.GetComponent<Button>().onClick.AddListener(
                 (() =>
                     {
-                        AddIdentifierToText(cardVariables[tempIndex]);
+                        AddIdentifierToText(CardUtils.CardVariables[tempIndex]);
                     }));
             index++;
         }

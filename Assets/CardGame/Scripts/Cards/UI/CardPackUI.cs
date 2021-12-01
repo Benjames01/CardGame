@@ -9,20 +9,24 @@ using UnityEngine.UI;
 
 public class CardPackUI : MonoBehaviour
 {
-
-    public static event Action OnPackDisplay;
     public static event Action<CardPack> OnViewCardPackPressed;
-
+    public static event Action<List<CardPack>> OnCardPacksSelected;
+    
     [SerializeField] private GameObject cardPackView;
     [SerializeField] private GameObject cardPackList;
+    [SerializeField] private GameObject selectedCardPackList;
     [SerializeField] private GameObject cardPackTemplate;
 
     [SerializeField] private ModalWindowManager createModalWindow;
     [SerializeField] private TMP_InputField cardPackTitleField;
 
     private List<CardPack> cardPacks;
+    
     private List<GameObject> clonedItemsList = new List<GameObject>();
-
+    private List<GameObject> clonedSelectedItemsList = new List<GameObject>();
+    
+    private List<int> selectedCardPacks = new List<int>();
+        
     private int selectedPack = -1;
 
     [SerializeField] private Button removeButton;
@@ -57,23 +61,32 @@ public class CardPackUI : MonoBehaviour
     {
       LoadCardPacks();
       
-      createModalWindow.cancelButton.onClick.AddListener(() =>
+      if (createModalWindow != null)
       {
-          createModalWindow.CloseWindow();
-      });
-        
-      createModalWindow.confirmButton.onClick.AddListener(() =>
-      {
-          if (string.IsNullOrEmpty(cardPackTitleField.text)) return;
-          
-          var cardPack = new CardPack(cardPackTitleField.text, new List<Card>());
-          CardPersistence.SaveCardPack(cardPack);
-          LoadCardPacks();
+          createModalWindow.cancelButton.onClick.AddListener(() =>
+          {
+              createModalWindow.CloseWindow();
+          });
+      }
 
-          cardPackTitleField.text = "";
-      });
+      if (createModalWindow != null)
+      {
+          createModalWindow.confirmButton.onClick.AddListener(() =>
+          {
+              if (string.IsNullOrEmpty(cardPackTitleField.text)) return;
+          
+              var cardPack = new CardPack(cardPackTitleField.text, new List<Card>());
+              CardPersistence.SaveCardPack(cardPack);
+              LoadCardPacks();
+
+              cardPackTitleField.text = "";
+          });
+      }
       
-      removeButton.onClick.AddListener(DeleteSelectedCardPack);
+      if (removeButton != null)
+      {
+          removeButton.onClick.AddListener(DeleteSelectedCardPack);
+      }
     }
 
     private void DeleteSelectedCardPack()
@@ -115,7 +128,15 @@ public class CardPackUI : MonoBehaviour
                 dateCreated.text = cardPack.DateCreated;
 
                 int tempIndex = index;
-                clone.GetComponent<Button>().onClick.AddListener(() => { selectedPack = tempIndex; });
+                clone.GetComponent<Button>().onClick.AddListener(() =>
+                {
+                    selectedPack = tempIndex;
+
+                    if (selectedCardPackList == null) return;
+                    Debug.Log("Selected: " + cardPack.Name);
+                    SelectCardPack(tempIndex);
+
+                });
                 
                 clonedItemsList.Add(clone);
                 index++;
@@ -152,15 +173,13 @@ public class CardPackUI : MonoBehaviour
     {
         OnViewCardPackPressed?.Invoke(cardPack);
     }
-
-
+    
     private void OnCardSavedAndExit(Card card)
     {
         UpdateCard(card);
         OnViewCardPackPressed?.Invoke(cardPacks[selectedPack]);
     }
-    
-    
+
     private void UpdateCard(Card card)
     {
         if (selectedPack == -1 || selectedPack > cardPacks.Count - 1) return;
@@ -184,11 +203,9 @@ public class CardPackUI : MonoBehaviour
         if (selectedPack == -1 || selectedPack > cardPacks.Count - 1) return;
 
         var removeCard = cardPacks[selectedPack].Cards.FirstOrDefault(c => c.ID == card.ID);
-        if(removeCard != null)
-        {
-            cardPacks[selectedPack].Cards.Remove(removeCard);
-            CardPersistence.SaveCardPack(cardPacks[selectedPack]);
-        }
+        if (removeCard == null) return;
+        cardPacks[selectedPack].Cards.Remove(removeCard);
+        CardPersistence.SaveCardPack(cardPacks[selectedPack]);
     }
     
     public void DisplayCreate()
@@ -207,5 +224,39 @@ public class CardPackUI : MonoBehaviour
     {
         SceneLoader.LoadScene(SceneLoader.Scene.MenuScene);
     }
-    
+
+    private void SelectCardPack(int cardPack)
+    {
+        selectedCardPacks.Add(cardPack);
+
+        var clone = Instantiate(clonedItemsList[cardPack], selectedCardPackList.transform, true);
+        clone.transform.localScale = Vector3.one;
+
+        var button = clone.GetComponent<Button>();
+
+        int index = selectedCardPacks.Count - 1;
+        button.onClick.RemoveAllListeners();
+        button.onClick.AddListener(() =>
+        {
+            RemoveSelectedCard(index);
+        });
+        
+        clonedSelectedItemsList.Add(clone);
+    }
+
+    private void RemoveSelectedCard(int index)
+    {
+        Destroy(clonedSelectedItemsList[index]);
+        selectedCardPacks[index] = -1;
+    }
+
+    public void OnCardPacksButton()
+    {
+        var packs = selectedCardPacks.Where(index => index > -1 && index <= this.cardPacks.Count - 1).Select(index => this.cardPacks[index]).ToList();
+
+        if (packs.Count > 0)
+        {
+            OnCardPacksSelected?.Invoke(packs);
+        }
+    }
 }

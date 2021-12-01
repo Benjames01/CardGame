@@ -20,7 +20,7 @@ public class CardViewerUI : MonoBehaviour
 
     [SerializeField] private GameObject cardList;
     [SerializeField] private GameObject cardTemplate;
-    
+
     private int selectedIndex;
     public static event Action<Card> OnCardSelected;
     public static event Action<Card> OnCardRemoved;
@@ -28,10 +28,8 @@ public class CardViewerUI : MonoBehaviour
     public static event Action<Card> OnCardAdded;
     public static event Action OnViewerDisplay;
 
-    public static event Action OnReturnPressed; 
+    public static event Action OnReturnPressed;
     
-    
-
     private void Awake()
     {
         btnReturn.onClick.AddListener(() =>
@@ -53,7 +51,7 @@ public class CardViewerUI : MonoBehaviour
     private void OnDisable()
     {
         CardPackUI.OnViewCardPackPressed -= OnViewCardPack;
-        
+
         CardCreatorUI.OnCardExit -= OnCardExit;
         CardCreatorUI.OnCardSavedAndExit -= OnSavedAndExit;
         CardCreatorUI.OnCardSaved -= OnSavedAndContinue;
@@ -88,12 +86,12 @@ public class CardViewerUI : MonoBehaviour
     {
         cardViewCanvas.gameObject.SetActive(true);
     }
-    
+
     private void OnSavedAndContinue(Card card)
     {
         ViewCardPack(cardPack, false);
     }
-    
+
     private void OnSavedAndExit(Card card)
     {
         ViewCardPack(cardPack);
@@ -103,7 +101,7 @@ public class CardViewerUI : MonoBehaviour
     {
         SetVisible();
         this.cardPack = pack;
-        
+
         if (cardTemplateClones.Count > 0)
         {
             foreach (var clone in cardTemplateClones)
@@ -111,29 +109,25 @@ public class CardViewerUI : MonoBehaviour
                 Destroy(clone);
             }
         }
-        
+
         int index = 0;
         foreach (var card in pack.Cards)
         {
             var clone = Instantiate(cardTemplate, cardList.transform, true);
-            
+
             TMP_Text name = clone.transform.Find("Name/Value").GetComponent<TMP_Text>();
             TMP_Text text = clone.transform.Find("Text/Value").GetComponent<TMP_Text>();
 
             clone.transform.localScale = Vector3.one;
-            
-            
+
             cardTemplateClones.Add(clone);
 
             name.text = card.Name;
             text.text = card.Text;
 
             int tempIndex = index;
-            clone.GetComponent<Button>().onClick.AddListener(() =>
-            {
-                selectedIndex = tempIndex;
-            });
-            
+            clone.GetComponent<Button>().onClick.AddListener(() => { selectedIndex = tempIndex; });
+
             index++;
             cardViewCanvas.gameObject.SetActive(showScreen);
         }
@@ -142,11 +136,13 @@ public class CardViewerUI : MonoBehaviour
 
     public void OnCardEdit()
     {
+        if (selectedIndex <= -1 || selectedIndex > cardPack.Cards.Count - 1) return;
         OnCardSelected?.Invoke(cardPack.Cards[selectedIndex]);
     }
 
     public void OnCardRemove()
     {
+        if (selectedIndex <= -1 || selectedIndex > cardPack.Cards.Count - 1) return;
         OnCardRemoved?.Invoke(cardPack.Cards[selectedIndex]);
         ViewCardPack(cardPack);
     }
@@ -156,6 +152,5 @@ public class CardViewerUI : MonoBehaviour
         OnCardAdded?.Invoke(new Card("", ""));
         ViewCardPack(cardPack);
     }
-    
     
 }
