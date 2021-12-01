@@ -17,11 +17,13 @@ public static class CardPersistence
             Directory.CreateDirectory(DataPath);
         }
         
+        string dataPath = GetDataPath(cardPack);
         string jsonData = JsonUtility.ToJson(cardPack, true);
-        File.WriteAllText(DataPath + cardPack.Name + ".json", jsonData);
+        
+        File.WriteAllText(dataPath + ".json", jsonData);
         
         
-        Debug.Log("Saved: " + cardPack.Name + ".json");
+        Debug.Log("Saved: " + cardPack.ID + ".json");
     }
     
     public static List<CardPack> LoadCardPacks()
@@ -36,7 +38,7 @@ public static class CardPersistence
 
         DirectoryInfo cardPacksFolder = new DirectoryInfo(DataPath);
         FileInfo[] cardPackFiles = cardPacksFolder.GetFiles("*.json");
-
+        
         foreach (var cardPack in cardPackFiles)
         {
             string jsonData = File.ReadAllText(DataPath + cardPack.Name);
@@ -47,13 +49,15 @@ public static class CardPersistence
         return cardPacks;
     }
 
-    public static bool RemoveCardPack(string cardPack)
+    public static bool RemoveCardPack(CardPack cardPack)
     {
         if (!Directory.Exists(DataPath))
             return false;
 
-        string cardPath = DataPath + cardPack + ".json";
-        string metaPath = DataPath + cardPack + ".json.meta";
+        string dataPath = GetDataPath(cardPack);
+        
+        string cardPath = dataPath + ".json";
+        string metaPath = dataPath + ".json.meta";
         if (File.Exists(cardPath))
         {
             File.Delete(cardPath);
@@ -67,6 +71,12 @@ public static class CardPersistence
         }
 
         return false;
+    }
+
+
+    private static string GetDataPath(CardPack cardPack)
+    {
+        return DataPath + cardPack.ID;
     }
 
 }

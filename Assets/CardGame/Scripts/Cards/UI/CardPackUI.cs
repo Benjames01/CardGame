@@ -91,7 +91,7 @@ public class CardPackUI : MonoBehaviour
 
     private void DeleteSelectedCardPack()
     {
-        CardPersistence.RemoveCardPack(cardPacks[selectedPack].Name);
+        CardPersistence.RemoveCardPack(cardPacks[selectedPack]);
         LoadCardPacks();
     }
     

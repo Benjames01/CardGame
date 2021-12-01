@@ -27,11 +27,21 @@ public class VariableRandomPlayer : ICardVariable
 
         List<Player> players = GameManager.Instance.GetGame().GetPlayers();
 
+
+
+        
+        
+        
         System.Random random = new System.Random();
 
         int index = random.Next(players.Count);
         Player player = players[index];
 
+        if (players.Count == 1)
+        {
+            return "<b>" + player.Name + "</b>";
+        }
+        
         while (player == lastSelectedPlayer)
         {
             index = random.Next(players.Count);

@@ -101,8 +101,13 @@ public class GameSettingsUI : MonoBehaviour
             if(team != null)
                 game.AddTeam(team);
         }
+
+
+        if (game.GetPlayers().Count > 0)
+        {
+            OnGameStarted?.Invoke(game);
+        }
         
-        OnGameStarted?.Invoke(game);
     }
     
     
