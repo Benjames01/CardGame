@@ -26,12 +26,6 @@ public class VariableRandomPlayer : ICardVariable
     {
 
         List<Player> players = GameManager.Instance.GetGame().GetPlayers();
-
-
-
-        
-        
-        
         System.Random random = new System.Random();
 
         int index = random.Next(players.Count);

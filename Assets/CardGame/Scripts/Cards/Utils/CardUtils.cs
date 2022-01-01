@@ -33,7 +33,7 @@ public class CardUtils
                 string value;
                 if (param != -1)
                 {
-                    Debug.Log("Param: " + match.Groups["Param"].Value);
+                   // Debug.Log("Param: " + match.Groups["Param"].Value);
                     value = cardVariable.GetValue(param);
                 }
                 else
@@ -43,7 +43,7 @@ public class CardUtils
                 
                 
                 int index = text.IndexOf(match.Value);
-                Debug.Log("replacing " + match.Value.ToString() + " at: " + index);
+                //Debug.Log("replacing " + match.Value.ToString() + " at: " + index);
                 if (index != -1)
                    text = text.Remove(index, match.Value.Length).Insert(index, value);
             }

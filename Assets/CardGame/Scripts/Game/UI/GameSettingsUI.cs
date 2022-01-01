@@ -21,8 +21,6 @@ public class GameSettingsUI : MonoBehaviour
     [SerializeField] private TMP_InputField playerName;
     [SerializeField] private HorizontalSelector teamsSelector;
 
-
-
     [SerializeField] private GameObject SettingsPanel;
     
     
@@ -30,7 +28,7 @@ public class GameSettingsUI : MonoBehaviour
     
     private List<CardPack> cardPacks;
 
-    private int teams;
+    private int teams = 1;
     
     private void Awake()
     {
@@ -102,6 +100,8 @@ public class GameSettingsUI : MonoBehaviour
                 game.AddTeam(team);
         }
 
+        int numberRounds = (int) SettingsPanel.transform.Find("Rounds/Slider").GetComponent<Slider>().value;
+        game.SetRounds(numberRounds);
 
         if (game.GetPlayers().Count > 0)
         {

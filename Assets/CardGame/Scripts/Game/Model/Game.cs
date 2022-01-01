@@ -14,6 +14,8 @@ public class Game
     private Player lastSelectedPlayer;
     private Team lastSelectedTeam;
     private Card lastSelectedCard;
+
+    private int rounds = 1;
     public void SetCardPacks(List<CardPack> cardPacks)
     {
         this.cardPacks = cardPacks;
@@ -30,6 +32,11 @@ public class Game
         players.AddRange(team.Players);
     }
 
+    public void SetRounds(int rounds)
+    {
+        this.rounds = rounds;
+    }
+    
     public void RemoveTeam(Team team)
     {
         Teams.Remove(team);
@@ -74,6 +81,13 @@ public class Game
         int index = new Random().Next(cards.Count);
         Card card = cards[index];
 
+        if (cards.Count == 1)
+        {
+            return cards[0];
+        } else if (cards.Count == 0)
+        {
+            return new Card("oopsy!", "This card was left empty :(");
+        }
         while (card == lastSelectedCard)
         {
             index = new Random().Next(cards.Count);
@@ -122,6 +136,11 @@ public class Game
         lastSelectedTeam = team;
         
         return team.Name;
+    }
+
+    public int GetRounds()
+    {
+        return rounds;
     }
     
 }
