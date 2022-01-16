@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
+// Interface for variables used in cards
 public interface ICardVariable
 {
     string Name { get; }

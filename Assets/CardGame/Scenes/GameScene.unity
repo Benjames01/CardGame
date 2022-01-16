@@ -745,6 +745,7 @@ GameObject:
   - component: {fileID: 67329384}
   - component: {fileID: 67329383}
   - component: {fileID: 67329382}
+  - component: {fileID: 67329385}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -817,6 +818,102 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &67329385
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 67329381}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &69176614
 GameObject:
   m_ObjectHideFlags: 0
@@ -2231,7 +2328,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1203.1997, y: 77.5}
+  m_AnchoredPosition: {x: 1159.3804, y: 77.5}
   m_SizeDelta: {x: 400, y: 55}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &230180277
@@ -2327,17 +2424,17 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   hoverSound: {fileID: 0}
-  clickSound: {fileID: 0}
+  clickSound: {fileID: 8300000, guid: 29d477f3fc1f8ed4a89d8ea3dd1d403d, type: 3}
   buttonVar: {fileID: 0}
   normalText: {fileID: 1571685032}
   highlightedText: {fileID: 1179888662}
-  soundSource: {fileID: 0}
+  soundSource: {fileID: 67329385}
   rippleParent: {fileID: 1061672751}
   animationSolution: 1
   fadingMultiplier: 8
   useCustomContent: 0
-  enableButtonSounds: 0
-  useHoverSound: 1
+  enableButtonSounds: 1
+  useHoverSound: 0
   useClickSound: 1
   useRipple: 1
   rippleUpdateMode: 1
@@ -2897,7 +2994,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -0.00012207031}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &336143499
@@ -3337,6 +3434,7 @@ GameObject:
   - component: {fileID: 364494424}
   - component: {fileID: 364494423}
   - component: {fileID: 364494422}
+  - component: {fileID: 364494426}
   m_Layer: 5
   m_Name: GAME
   m_TagString: Untagged
@@ -3425,6 +3523,102 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!82 &364494426
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 364494421}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &367560681
 GameObject:
   m_ObjectHideFlags: 0
@@ -6249,6 +6443,8 @@ MonoBehaviour:
   GameWindow: {fileID: 364494421}
   cardTitle: {fileID: 371753586}
   cardText: {fileID: 1876977571}
+  gameTitle: {fileID: 926421976}
+  continueButtonText: {fileID: 230180279}
 --- !u!114 &893250313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6628,8 +6824,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 295, y: -30}
-  m_SizeDelta: {x: 325, y: 50}
+  m_AnchoredPosition: {x: 429, y: -30}
+  m_SizeDelta: {x: 562.27637, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &926421976
 MonoBehaviour:
@@ -6685,7 +6881,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 16
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 5
@@ -6714,7 +6910,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 1
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 1}
+  m_margin: {x: 0, y: 0, z: 0.000060831437, w: 1}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -7177,17 +7373,17 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   hoverSound: {fileID: 0}
-  clickSound: {fileID: 0}
+  clickSound: {fileID: 8300000, guid: 29d477f3fc1f8ed4a89d8ea3dd1d403d, type: 3}
   buttonVar: {fileID: 0}
   normalText: {fileID: 908970672}
   highlightedText: {fileID: 251965804}
-  soundSource: {fileID: 0}
+  soundSource: {fileID: 67329385}
   rippleParent: {fileID: 359330949}
   animationSolution: 1
   fadingMultiplier: 8
   useCustomContent: 0
-  enableButtonSounds: 0
-  useHoverSound: 1
+  enableButtonSounds: 1
+  useHoverSound: 0
   useClickSound: 1
   useRipple: 1
   rippleUpdateMode: 1
@@ -9088,6 +9284,7 @@ GameObject:
   - component: {fileID: 1295618173}
   - component: {fileID: 1295618172}
   - component: {fileID: 1295618171}
+  - component: {fileID: 1295618175}
   m_Layer: 5
   m_Name: Game Settings
   m_TagString: Untagged
@@ -9176,6 +9373,102 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!82 &1295618175
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1295618170}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1296406817
 GameObject:
   m_ObjectHideFlags: 0
@@ -9555,17 +9848,17 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   hoverSound: {fileID: 0}
-  clickSound: {fileID: 0}
+  clickSound: {fileID: 8300000, guid: 29d477f3fc1f8ed4a89d8ea3dd1d403d, type: 3}
   buttonVar: {fileID: 0}
   normalText: {fileID: 1129938290}
   highlightedText: {fileID: 511357836}
-  soundSource: {fileID: 0}
+  soundSource: {fileID: 67329385}
   rippleParent: {fileID: 1670763429}
   animationSolution: 1
   fadingMultiplier: 8
   useCustomContent: 0
-  enableButtonSounds: 0
-  useHoverSound: 1
+  enableButtonSounds: 1
+  useHoverSound: 0
   useClickSound: 1
   useRipple: 1
   rippleUpdateMode: 1
@@ -12785,7 +13078,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1191859280}
   m_HandleRect: {fileID: 1191859279}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -13369,17 +13662,17 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   hoverSound: {fileID: 0}
-  clickSound: {fileID: 0}
+  clickSound: {fileID: 8300000, guid: 29d477f3fc1f8ed4a89d8ea3dd1d403d, type: 3}
   buttonVar: {fileID: 0}
   normalText: {fileID: 1772673587}
   highlightedText: {fileID: 1137160929}
-  soundSource: {fileID: 0}
+  soundSource: {fileID: 67329385}
   rippleParent: {fileID: 1524444403}
   animationSolution: 1
   fadingMultiplier: 8
   useCustomContent: 0
-  enableButtonSounds: 0
-  useHoverSound: 1
+  enableButtonSounds: 1
+  useHoverSound: 0
   useClickSound: 1
   useRipple: 1
   rippleUpdateMode: 1
@@ -14560,17 +14853,17 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   hoverSound: {fileID: 0}
-  clickSound: {fileID: 0}
+  clickSound: {fileID: 8300000, guid: 29d477f3fc1f8ed4a89d8ea3dd1d403d, type: 3}
   buttonVar: {fileID: 0}
   normalText: {fileID: 1256772218}
   highlightedText: {fileID: 1250332947}
-  soundSource: {fileID: 0}
+  soundSource: {fileID: 67329385}
   rippleParent: {fileID: 1988777475}
   animationSolution: 1
   fadingMultiplier: 8
   useCustomContent: 0
-  enableButtonSounds: 0
-  useHoverSound: 1
+  enableButtonSounds: 1
+  useHoverSound: 0
   useClickSound: 1
   useRipple: 1
   rippleUpdateMode: 1
@@ -14702,7 +14995,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 759.06964, y: 77.5}
+  m_AnchoredPosition: {x: 715.2504, y: 77.5}
   m_SizeDelta: {x: 400, y: 55}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &2132149589
@@ -14798,17 +15091,17 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   hoverSound: {fileID: 0}
-  clickSound: {fileID: 0}
+  clickSound: {fileID: 8300000, guid: 29d477f3fc1f8ed4a89d8ea3dd1d403d, type: 3}
   buttonVar: {fileID: 0}
   normalText: {fileID: 1605623941}
   highlightedText: {fileID: 1462794059}
-  soundSource: {fileID: 0}
+  soundSource: {fileID: 67329385}
   rippleParent: {fileID: 344901406}
   animationSolution: 1
   fadingMultiplier: 8
   useCustomContent: 0
-  enableButtonSounds: 0
-  useHoverSound: 1
+  enableButtonSounds: 1
+  useHoverSound: 0
   useClickSound: 1
   useRipple: 1
   rippleUpdateMode: 1
@@ -16370,17 +16663,17 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   hoverSound: {fileID: 0}
-  clickSound: {fileID: 0}
+  clickSound: {fileID: 8300000, guid: 29d477f3fc1f8ed4a89d8ea3dd1d403d, type: 3}
   buttonVar: {fileID: 0}
   normalText: {fileID: 2260930089834414393}
   highlightedText: {fileID: 2260930089571677617}
-  soundSource: {fileID: 0}
+  soundSource: {fileID: 67329385}
   rippleParent: {fileID: 2260930090224801476}
   animationSolution: 1
   fadingMultiplier: 8
   useCustomContent: 0
-  enableButtonSounds: 0
-  useHoverSound: 1
+  enableButtonSounds: 1
+  useHoverSound: 0
   useClickSound: 1
   useRipple: 1
   rippleUpdateMode: 1
@@ -16922,6 +17215,7 @@ GameObject:
   - component: {fileID: 2260930090394934795}
   - component: {fileID: 2260930090394934796}
   - component: {fileID: 2260930090394934797}
+  - component: {fileID: 2260930090394934799}
   m_Layer: 5
   m_Name: Card Pack
   m_TagString: Untagged
@@ -16929,6 +17223,102 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!82 &2260930090394934799
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2260930090394934798}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!222 &2260930090453118816
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -16993,7 +17383,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -0.00012207031}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &2260930090453118820
@@ -17254,17 +17644,17 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   hoverSound: {fileID: 0}
-  clickSound: {fileID: 0}
+  clickSound: {fileID: 8300000, guid: 29d477f3fc1f8ed4a89d8ea3dd1d403d, type: 3}
   buttonVar: {fileID: 0}
   normalText: {fileID: 2260930090551366494}
   highlightedText: {fileID: 2260930089905812619}
-  soundSource: {fileID: 0}
+  soundSource: {fileID: 67329385}
   rippleParent: {fileID: 2260930089868595180}
   animationSolution: 1
   fadingMultiplier: 8
   useCustomContent: 0
-  enableButtonSounds: 0
-  useHoverSound: 1
+  enableButtonSounds: 1
+  useHoverSound: 0
   useClickSound: 1
   useRipple: 1
   rippleUpdateMode: 1
@@ -18436,17 +18826,17 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   hoverSound: {fileID: 0}
-  clickSound: {fileID: 0}
+  clickSound: {fileID: 8300000, guid: 29d477f3fc1f8ed4a89d8ea3dd1d403d, type: 3}
   buttonVar: {fileID: 0}
   normalText: {fileID: 2260930090314485288}
   highlightedText: {fileID: 2260930090956037417}
-  soundSource: {fileID: 0}
+  soundSource: {fileID: 67329385}
   rippleParent: {fileID: 2260930091046005387}
   animationSolution: 1
   fadingMultiplier: 8
   useCustomContent: 0
-  enableButtonSounds: 0
-  useHoverSound: 1
+  enableButtonSounds: 1
+  useHoverSound: 0
   useClickSound: 1
   useRipple: 1
   rippleUpdateMode: 1
@@ -18741,7 +19131,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2260930089793219449}
   m_HandleRect: {fileID: 2260930089793219450}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:

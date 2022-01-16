@@ -180,6 +180,7 @@ public class CardPackUI : MonoBehaviour
         OnViewCardPackPressed?.Invoke(cardPacks[selectedPack]);
     }
 
+    // Update a given card in the card pack
     private void UpdateCard(Card card)
     {
         if (selectedPack == -1 || selectedPack > cardPacks.Count - 1) return;
@@ -198,6 +199,7 @@ public class CardPackUI : MonoBehaviour
         CardPersistence.SaveCardPack(cardPacks[selectedPack]);
     }
 
+    // Remove given card from the card pack
     private void RemoveCard(Card card)
     {
         if (selectedPack == -1 || selectedPack > cardPacks.Count - 1) return;

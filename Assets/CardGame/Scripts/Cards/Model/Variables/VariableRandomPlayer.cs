@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.Remoting.Messaging;
+﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using UnityEngine;
+
 
 
 public class VariableRandomPlayer : ICardVariable
@@ -22,33 +20,39 @@ public class VariableRandomPlayer : ICardVariable
         get => "%RandomPlayer%";
     }
     
+    // Select and return the name of a random player in the game
     public string GetValue(int args=-1)
     {
-
         List<Player> players = GameManager.Instance.GetGame().GetPlayers();
         System.Random random = new System.Random();
 
         int index = random.Next(players.Count);
         Player player = players[index];
 
+        
+        // if there's only one player, return that player's name
         if (players.Count == 1)
         {
             return "<b>" + player.Name + "</b>";
         }
         
+        // While the player chosen is the same as the previously chosen player, pick another
         while (player == lastSelectedPlayer)
         {
             index = random.Next(players.Count);
             player = players[index];
         }
-
+        
+        // Update the last selected player
         lastSelectedPlayer = player;
         
+        // Return the player's name with some formatting
         return "<b>" + player.Name + "</b>";
     }
 
+    // Return the regex used to find the identifier in card
     public Regex GetRegex()
     {
-        return new Regex("%RandomPlayer%", RegexOptions.IgnoreCase);
+        return new Regex(Identifier, RegexOptions.IgnoreCase);
     }
 }

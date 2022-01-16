@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Runtime.Remoting.Messaging;
 using UnityEngine;
 
 public static class CardPersistence
@@ -30,15 +27,18 @@ public static class CardPersistence
     {
         List<CardPack> cardPacks = new List<CardPack>();
 
+        // Create the Card Pack directory if it doesn't already exist
         if (!Directory.Exists(DataPath))
         {
             Debug.Log("Creating CardPack Directory at: " + DataPath);
             Directory.CreateDirectory(DataPath);
         }
 
+        // Get all files in the directory with the .json format
         DirectoryInfo cardPacksFolder = new DirectoryInfo(DataPath);
         FileInfo[] cardPackFiles = cardPacksFolder.GetFiles("*.json");
         
+        // For all of the card pack files, convert from json into a CardPack object and add to list of card packs
         foreach (var cardPack in cardPackFiles)
         {
             string jsonData = File.ReadAllText(DataPath + cardPack.Name);
@@ -46,6 +46,7 @@ public static class CardPersistence
             cardPacks.Add(pack);
         }
 
+        // return the list of card packs loaded
         return cardPacks;
     }
 
@@ -58,6 +59,8 @@ public static class CardPersistence
         
         string cardPath = dataPath + ".json";
         string metaPath = dataPath + ".json.meta";
+        
+        // Check the file and its meta data file exist and delete
         if (File.Exists(cardPath))
         {
             File.Delete(cardPath);
@@ -67,13 +70,15 @@ public static class CardPersistence
                 File.Delete(metaPath);
             }
             
+            // Successfully deleted
             return true;
         }
 
+        // Didn't delete
         return false;
     }
 
-
+    // Return the file path for the given card pack
     private static string GetDataPath(CardPack cardPack)
     {
         return DataPath + cardPack.ID;

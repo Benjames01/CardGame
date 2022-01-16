@@ -54,8 +54,11 @@ public class CardCreatorUI : MonoBehaviour
         CardViewerUI.OnCardSelected -= EditCard;
     }
 
+    
     private void Awake()
     {
+        
+        // Add event listeners
         btnCancelAndExit.onClick.AddListener(() =>
         {
             OnSaveButtonClicked(SaveType.CancelAndExit);
@@ -72,7 +75,9 @@ public class CardCreatorUI : MonoBehaviour
             }
         );
     }
-
+    
+    
+    // Enable the card creator view and update the ui to reflect the selected card
     public void EditCard(Card card)
     {
         OnCreatorDisplay?.Invoke();
@@ -82,8 +87,7 @@ public class CardCreatorUI : MonoBehaviour
         cardNameField.text = card.Name;
         cardTextField.text = card.Text;
     }
-
-
+    
     public enum SaveType
     {
         SaveAndContinue,
@@ -92,9 +96,9 @@ public class CardCreatorUI : MonoBehaviour
         
     }
     
-
     public void OnSaveButtonClicked(SaveType saveType)
     {
+        // Dont save if card text or name is empty
         if (string.IsNullOrWhiteSpace(cardNameField.text) || string.IsNullOrWhiteSpace(cardTextField.text))
         {
             notificationManager.title = "Error Saving Card!";
@@ -111,6 +115,7 @@ public class CardCreatorUI : MonoBehaviour
                 card.Text = cardTextField.text;
             }
             
+            // Follow selected save procedure
             switch (saveType)
             {
                 case SaveType.CancelAndExit:
@@ -133,6 +138,8 @@ public class CardCreatorUI : MonoBehaviour
         }
     }
     
+    
+    // Create the ui buttons for their respective card variables
     public void PrepareVariablesList()
     {
         int index = 0;
